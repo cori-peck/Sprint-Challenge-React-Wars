@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import CharList from './components/CharList';
 
 class App extends Component {
   constructor() {
@@ -32,12 +33,16 @@ class App extends Component {
 
   showCurrentChar = name => {
     const currentChar = this.state.starwarsChars.find(char => char.name === name);
+    this.setState({currentChar:currentChar});
   }
 
   render() {
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
+          <div>
+            <CharList chars={this.state.starwarsChars} showCurrentChar={this.showCurrentChar} />
+          </div>
       </div>
     );
   }
