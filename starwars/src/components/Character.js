@@ -2,7 +2,7 @@ import React from "react";
 
 const Character = props => {
     return (
-        <div>
+        <div onClick={() => props.showCurrentChar(props.char.name)}>
             {props.char.name}
         </div>
     );

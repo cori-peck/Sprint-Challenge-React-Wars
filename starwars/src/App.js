@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import CharList from './components/CharList';
+import CharCard from './components/CharCard';
 
 class App extends Component {
   constructor() {
@@ -24,28 +25,58 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.setState({ starwarsChars: data.results, nextPg: data.next, prevPg: data.previous});
       })
       .catch(err => {
         throw new Error(err);
       });
   };
 
+  dispLastPg = e => {
+      if(this.state.prevPg !== null) {
+        const newData = this.getCharacters(this.state.prevPg);
+        console.log(newData);
+      }
+  }
+
+  dispNextPg = e => {
+    if(this.state.nextPg !== null) {
+      const newData = this.getCharacters(this.state.nextPg);
+      console.log(newData);
+    }
+  }
+
   showCurrentChar = name => {
     const currentChar = this.state.starwarsChars.find(char => char.name === name);
     this.setState({currentChar:currentChar});
   }
 
+  returnList = e => {
+    this.setState({currentChar: null});
+  }
+
   render() {
-    return (
-      <div className="App">
-        <h1 className="Header">React Wars</h1>
-          <div>
-            <CharList chars={this.state.starwarsChars} showCurrentChar={this.showCurrentChar} />
-          </div>
-      </div>
+    if (this.state.currentChar === null) {
+      return (
+        <div className="App">
+          <h1 className="Header">React Wars</h1>
+            <div>
+              <CharList chars={this.state.starwarsChars} 
+                showCurrentChar={this.showCurrentChar}
+                dispNextPg={this.dispNextPg}
+                dispLastPg={this.dispLastPg}
+                 />
+            </div>
+        </div>
     );
   }
-}
+  else {
+    return (
+      <div>
+        <CharCard returnList={this.returnList} character={this.state.currentChar} />
+      </div>
+    );
+  };
+};
 
 export default App;

@@ -9,8 +9,12 @@ const CharList = props => {
                                     key={index}
                                     showCurrentChar={props.showCurrentChar} />
             })}
+            <div>
+                <div onClick={props.dispLastPg}>Previous Card</div>
+                <div onClick={props.dispNextPg}>Next Card</div>
+            </div>
         </div>
-    )
+    );
 }
 
 export default CharList;
