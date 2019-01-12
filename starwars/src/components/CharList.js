@@ -3,15 +3,17 @@ import Character from './Character';
 
 const CharList = props => {
     return (
-        <div>
+        <div className="App">
+            <div className="List">
             {props.chars.map((char, index) => {
                 return <Character char={char}
                                     key={index}
                                     showCurrentChar={props.showCurrentChar} />
             })}
+            </div>
             <div>
-                <div onClick={props.dispLastPg}>Previous Card</div>
-                <div onClick={props.dispNextPg}>Next Card</div>
+                <button className="rtnBtn" onClick={props.dispLastPg}>Previous Card</button>
+                <button className="rtnBtn" onClick={props.dispNextPg}>Next Card</button>
             </div>
         </div>
     );

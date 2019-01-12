@@ -9,6 +9,8 @@ class App extends Component {
     this.state = {
       starwarsChars: [],
       currentChar: null,
+      nextPg: null,
+      prevPg: null
     };
   }
 
@@ -32,14 +34,14 @@ class App extends Component {
       });
   };
 
-  dispLastPg = e => {
+  dispLastPg = event => {
       if(this.state.prevPg !== null) {
         const newData = this.getCharacters(this.state.prevPg);
         console.log(newData);
       }
   }
 
-  dispNextPg = e => {
+  dispNextPg = event => {
     if(this.state.nextPg !== null) {
       const newData = this.getCharacters(this.state.nextPg);
       console.log(newData);
@@ -51,7 +53,7 @@ class App extends Component {
     this.setState({currentChar:currentChar});
   }
 
-  returnList = e => {
+  returnList = event => {
     this.setState({currentChar: null});
   }
 
@@ -65,6 +67,8 @@ class App extends Component {
                 showCurrentChar={this.showCurrentChar}
                 dispNextPg={this.dispNextPg}
                 dispLastPg={this.dispLastPg}
+                nextPg={this.state.nextPage}
+                prevPg={this.state.prevPg}
                  />
             </div>
         </div>
@@ -78,5 +82,6 @@ class App extends Component {
     );
   };
 };
+}
 
 export default App;
